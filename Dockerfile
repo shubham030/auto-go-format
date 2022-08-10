@@ -12,6 +12,7 @@ LABEL "com.github.actions.color"="blue"
 RUN apk --no-cache add jq bash curl git git-lfs
 RUN GO111MODULE=on go install mvdan.cc/gofumpt@latest
 RUN git config --global --add safe.directory /github/workspace
+RUN chown -R $(id -u):$(id -g) $PWD
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
